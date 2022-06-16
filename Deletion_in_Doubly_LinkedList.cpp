@@ -53,22 +53,27 @@ void AtPos(int value, int pos){
     temp->next=ptr2;
     ptr2->prev=temp;
 }
-void RevList(){
-    struct node *ptr=head;
-    while(ptr->next!=NULL)
-        ptr=ptr->next;
-    while(ptr->prev!=NULL){
-        cout<<ptr->data<<endl;
-        ptr=ptr->prev;
+
+void deletion(int pos){
+    struct node *ptr1=head;
+    struct node *ptr2=head;
+    while(pos>1){
+        ptr1=ptr1->next;
+        pos--;
     }
-    
+    ptr2=ptr1->prev;
+    ptr2->next=ptr1->next;
+    ptr1->next->prev=ptr2;
+    delete(ptr1);
 }
+
 int main(){
     add(45);
     beginning(12);
     InsertEnd(92);
     AtPos(89, 3);
-    RevList();
+    deletion(3);
+   
     
     struct node *ptr=head;
     while(ptr!=NULL){
